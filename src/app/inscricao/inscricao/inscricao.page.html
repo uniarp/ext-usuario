@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inscriçâo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form #partiForm="ngForm" autocomplete="off" (ngSubmit)="gravarInscricao(partiForm)">
+    <ion-label>Código do Participante</ion-label>
+    <ion-input type="text" [(ngModel)]="codParticipante" #codPart="ngModel" name="codPart" required></ion-input>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{evento.titulo}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        O Evento terá inicio no dia {{evento.periodoInicial|date:'dd/MM/yyyy'}} com termino no dia 
+        {{evento.periodoInicial|date:'dd/MM/yyyy'}}.
+        <br>
+        <br>
+        <b>Atividades</b>
+        <br>
+        Selecione as atividades que você irá participar
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item>Nome</ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>Localização</ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>Participar</ion-item>
+              </ion-col>
+            </ion-row>
+
+            <div *ngFor="let atividade of evento.atividades">
+              <ion-row>
+                <ion-col>
+                  <ion-item>{{atividade.titulo}}</ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>{{atividade.localizacao}}</ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-checkbox checked (ionChange)="desmarcaAtvidade(atividade.codAtividade)"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-grid>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+
+    <div>
+      <ion-item>
+        <ion-button type="submit">
+          Finalizar Inscrição
+        </ion-button>
+      </ion-item>
+    </div>
+  </form>
+</ion-content>

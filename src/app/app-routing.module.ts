@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'inscricao',
+    loadChildren: () => import('./inscricao/inscricao/inscricao.module').then( m => m.InscricaoPageModule)
+  },
 ];
 
 @NgModule({

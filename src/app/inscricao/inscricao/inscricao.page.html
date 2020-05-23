@@ -1,67 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Inscriçâo</ion-title>
+    <ion-title>Inscrição</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
   <form #partiForm="ngForm" autocomplete="off" (ngSubmit)="gravarInscricao(partiForm)">
-    <ion-label>Código do Participante</ion-label>
-    <ion-input type="text" [(ngModel)]="codParticipante" #codPart="ngModel" name="codPart" required></ion-input>
-    <ion-card>
+    <ion-card *ngIf="evento.codEvento">
       <ion-card-header>
         <ion-card-title>{{evento.titulo}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        O Evento terá inicio no dia {{evento.periodoInicial|date:'dd/MM/yyyy'}} com termino no dia 
+        O Evento terá início no dia {{evento.periodoInicial|date:'dd/MM/yyyy'}} com término no dia
         {{evento.periodoInicial|date:'dd/MM/yyyy'}}.
         <br>
         <br>
         <b>Atividades</b>
         <br>
         Selecione as atividades que você irá participar
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <ion-item>Nome</ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>Localização</ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>Participar</ion-item>
-              </ion-col>
-            </ion-row>
+        <ion-list>
 
-            <div *ngFor="let atividade of evento.atividades">
-              <ion-row>
-                <ion-col>
-                  <ion-item>{{atividade.titulo}}</ion-item>
-                </ion-col>
-                <ion-col>
-                  <ion-item>{{atividade.localizacao}}</ion-item>
-                </ion-col>
-                <ion-col>
-                  <ion-item>
-                    <ion-checkbox checked (ionChange)="desmarcaAtvidade(atividade.codAtividade)"></ion-checkbox>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-grid>
-        </ion-item>
+          <ion-item *ngFor="let atividade of evento.atividades">
+            <ion-label>
+              <h2>
+                <ion-icon name="information-circle-outline"></ion-icon> {{atividade.titulo}}
+              </h2>
+              <h3>
+                <ion-icon name="calendar-outline"></ion-icon> Início {{atividade.dataInicio|date:'dd/MM/yyyy - hh:mm'}}
+              </h3>
+              <h3>
+                <ion-icon name="calendar-outline"></ion-icon> Fim {{atividade.dataFim|date:'dd/MM/yyyy - hh:mm'}}
+              </h3>
+              <ion-icon name="location-outline"></ion-icon> {{atividade.localizacao}}
+            </ion-label>
+            <ion-checkbox checked (ionChange)="desmarcaAtvidade(atividade.codAtividade)"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+
       </ion-card-content>
-    </ion-card>
-
-
-    <div>
-      <ion-item>
+      <ion-item *ngIf="evento.codEvento">
         <ion-button type="submit">
-          Finalizar Inscrição
+          Finalizar
         </ion-button>
       </ion-item>
-    </div>
+    </ion-card>
+
   </form>
 </ion-content>

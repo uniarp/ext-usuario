@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{editando?'Editar ': 'Cadastro de '}}Participante</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  
+  <form autocomplete="off" #partiForm="ngForm" (ngSubmit)="gravar(partiForm)">
+    <ion-item>
+      <ion-label position="floating">Nome<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [(ngModel)]="participante.nome" #nome="ngModel" name="nome" required
+      minlength="10"></ion-input>
+      <div class="validaCamp" *ngIf="nome.hasError('required') && nome.touched">*Informe um nome válido!</div>
+      <div class="validaCamp" *ngIf="nome.hasError('minlength')">*O nome precisa ser completo!</div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">E-mail<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [(ngModel)]="participante.email" #email="ngModel" name="email" required
+      email></ion-input>
+      <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail válido!</div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input [(ngModel)]="participante.cpf" #cpf="ngModel" name="cpf"
+      [brmasker]="{person: true}" maxlength="14"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Senha<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [type]="password_type"  [(ngModel)]="confirSenha" #senhaC="ngModel" name="senhaC"
+      required minlength="6"></ion-input>
+      <div class="validaCamp" *ngIf="senhaC.hasError('minlength')">*A senha precisa ter no mínimo 6 digitos!</div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Confirme sua Senha<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input [type]="password_type" [(ngModel)]="participante.senha" #senha="ngModel"
+      name="senha" required></ion-input>
+      <div class="validaCamp" *ngIf="confirSenha != participante.senha && senha.dirty">Senha não coincide com a anterior!
+      </div>
+    </ion-item>  
+    <ion-item>
+      <ion-label>Exibir senha</ion-label>
+      <ion-checkbox color="dark" slot="start" (click)="exibeSenha()"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input [(ngModel)]="participante.telefone" #telefone="ngModel" name="telefone"
+      [brmasker]="{phone: true}" maxlength="15"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">R.A</ion-label>
+      <ion-input [(ngModel)]="participante.ra" #ra="ngModel" name="ra" 
+      [brmasker]="{mask:'000000', type:'num'}" maxlength="6"></ion-input>
+    </ion-item>
+
+    <div class="validaCamp" *ngIf="partiForm.invalid">Campos com * São obrigatórios</div>
+    <br>
+    <ion-button type="submit" [disabled]="partiForm.invalid">Gravar</ion-button>
+  </form>
+
+  </ion-content>
+

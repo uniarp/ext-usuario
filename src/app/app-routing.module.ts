@@ -15,6 +15,11 @@ const routes: Routes = [
     path: 'inscricao',
     loadChildren: () => import('./inscricao/inscricao/inscricao.module').then( m => m.InscricaoPageModule)
   },
+  {
+    path: 'participante-cadastro',
+    loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module').then( m => m.ParticipanteCadastroPageModule)
+  },
+
 ];
 
 @NgModule({

@@ -31,8 +31,7 @@ export class ConsultaParticipantePage implements OnInit {
   }
 
   async eventoParticipado(cpf) {
-    console.log(cpf);
-    this.router.navigate(['/evento-participados'], { queryParams: { cpf:cpf }});
+    this.router.navigate(['/evento-participados/' + cpf]);
   }
 
   ionViewWillEnter() {

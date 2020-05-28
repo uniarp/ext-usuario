@@ -18,8 +18,7 @@ export class ConsultaEventoService {
     })
   };
 
-  async carregarEvento(cpf: any): Promise<Evento> {
-    console.log(cpf)
+  async carregarEvento(cpf: string): Promise<Evento> {
     return this.http.get<Evento>(`${this.participanteUrl}/eventos/${cpf}`)
       .toPromise();
   }

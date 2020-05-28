@@ -23,19 +23,18 @@ export class EventoParticipadosPage implements OnInit {
     private route: ActivatedRoute,
     public handler: ErrorHandlerService,
     private erroHandler: ErrorHandlerService
-    
+
   ) { }
 
   ngOnInit() {
-    console.log(this.route.queryParams);
-    // this.recebe();
-    // this.cpf = this.route.queryParams['cpf'];
-    this.consultaEventoService.carregarEvento(this.route.queryParams);
+    this.route.params.subscribe(parametros => {
+      this.consultaEventoService.carregarEvento(parametros['cpf']);
+    });
   }
 
-  recebe(){
+  recebe() {
     this.cpf = this.route.queryParams['cpf'];
     console.log("1")
   }
-  
+
 }

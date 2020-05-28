@@ -20,12 +20,16 @@
       <ion-grid>
         <ion-row>
           <ion-col>Evento</ion-col>
+          <ion-col>Presente</ion-col>
         </ion-row>
-        <div *ngFor="let evento of evento">
+        <div *ngFor="let evento of eventos">
           <ion-radio-group>
             <ion-row>
               <ion-col>
-                {{evento.listarParticipante}}
+                {{evento.titulo}}
+              </ion-col>
+              <ion-col>
+                {{evento.presente ? 'Sim' : 'Não'}}
               </ion-col>
             </ion-row>
           </ion-radio-group>

@@ -16,6 +16,7 @@ export class EventoParticipadosPage implements OnInit {
   carregarEvento: any;
   inscritos: any;
   navParams: any;
+  eventos: any;
 
   constructor(
     public consultaEventoService: ConsultaEventoService,
@@ -28,7 +29,11 @@ export class EventoParticipadosPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(parametros => {
-      this.consultaEventoService.carregarEvento(parametros['cpf']);
+      this.consultaEventoService.carregarEvento(parametros['cpf'])
+        .then(data => {
+          this.eventos = data;
+        })
+        .catch(erro => this.erroHandler.handleError(erro));
     });
   }
 
@@ -36,5 +41,4 @@ export class EventoParticipadosPage implements OnInit {
     this.cpf = this.route.queryParams['cpf'];
     console.log("1")
   }
-
 }

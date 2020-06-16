@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ConsultaEventoService, Participante } from '../consulta-evento.service';
+import { ConsultaEventoService } from '../consulta-evento.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { NavParams } from '@ionic/angular';
 
 @Component({
-  selector: 'app-evento-participandos',
-  templateUrl: './evento-participados.page.html',
-  styleUrls: ['./evento-participados.page.scss'],
+  selector: 'app-qr-code',
+  templateUrl: './qr-code.page.html',
+  styleUrls: ['./qr-code.page.scss'],
 })
-export class EventoParticipadosPage implements OnInit {
+export class QrCodePage implements OnInit {
 
+  codEvento: any;
   codParticipante: any;
-  carregarEvento: any;
   listarIngresso: any;
   navParams: any;
   eventos: any;
@@ -28,20 +27,16 @@ export class EventoParticipadosPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(parametros => {
-      this.consultaEventoService.carregarEvento(parametros['codParticipante'])
+      this.consultaEventoService.listarIngresso(parametros['codEvento'])
         .then(data => {
           this.eventos = data;
+          console.log(data)
         })
         .catch(erro => this.erroHandler.handleError(erro));
     });
   }
-
-  recebe() {
-    this.codParticipante = this.route.queryParams['codParticipante'];
-    console.log("1")
-  }
-
-  ingresso(codEvento){
-    this.router.navigate(['/qr-code'+ codEvento]);
+  qrcode(){
+    this.codEvento = this.route.queryParams['codEvento'];
+    console.log("q")
   }
 }

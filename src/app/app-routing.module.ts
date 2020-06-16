@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'consulta-participante',
     loadChildren: () => import('./evento-participante/consulta-Participante/consulta-participante/consulta-participante.module').then( m => m.ConsultaParticipantePageModule)
+  },  {
+    path: 'qr-code',
+    loadChildren: () => import('./evento-participante/qr-code/qr-code.module').then( m => m.QrCodePageModule)
   },
+
 
 
 ];

@@ -21,6 +21,7 @@
         <ion-row>
           <ion-col>Evento</ion-col>
           <ion-col>Presente</ion-col>
+          
         </ion-row>
         <div *ngFor="let evento of eventos">
           <ion-radio-group>
@@ -31,6 +32,9 @@
               <ion-col>
                 {{evento.presente ? 'Sim' : 'Não'}}
               </ion-col>
+              <ion-item>
+                <ion-button (click)="ingresso(evento.codEvento)">Ingresso</ion-button>
+              </ion-item>
             </ion-row>
           </ion-radio-group>
         </div>

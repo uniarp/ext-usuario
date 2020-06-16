@@ -27,6 +27,12 @@ export class ConsultaEventoService {
       .toPromise();
   }
 
+  async listarIngresso(codEvento: any): Promise<Evento>{
+    console.log("w")
+    return this.http.get<Evento>(`${this.participanteUrl}/qrCode/${codEvento}`)
+    .toPromise();
+  }
+
 }
 
 export class Participante {

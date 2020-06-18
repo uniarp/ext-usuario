@@ -1,3 +1,4 @@
+import { AngularFireAuthModule } from '@angular/fire/auth/';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { LoginUsuarioPage } from './login-usuario.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginUsuarioPageRoutingModule
+    LoginUsuarioPageRoutingModule,
+    AngularFireAuthModule,
   ],
   declarations: [LoginUsuarioPage]
 })

@@ -3,6 +3,7 @@ import { ConsultaEventoService } from '../consulta-evento.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Evento } from 'src/app/inscricao/inscricao.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-qr-code',
@@ -16,28 +17,29 @@ export class QrCodePage implements OnInit {
   listarIngresso: any;
   navParams: any;
   eventos: any;
+  qrCode: any;
 
   constructor(
     public consultaEventoService: ConsultaEventoService,
     public router: Router,
     private route: ActivatedRoute,
     public handler: ErrorHandlerService,
-    private erroHandler: ErrorHandlerService
+    private erroHandler: ErrorHandlerService,
+    private sanitizer: DomSanitizer
 
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe(parametros => {
-      this.consultaEventoService.listarIngresso(parametros['inscricao'])
-        .then(data => {
-          this.eventos = data;
-          console.log(data)
-        })
-        .catch(erro => this.erroHandler.handleError(erro));
+      this.gerarQrCode(parametros['codInscricao']);
     });
   }
-  qrcode(){
-    this.codEvento = this.route.queryParams['inscricao'];
-    console.log("q")
+
+  gerarQrCode(codInscricao: any) {
+    this.consultaEventoService.listarIngresso(codInscricao)
+      .then(data => {
+        this.qrCode = this.sanitizer.bypassSecurityTrustUrl(data['base64']);
+      })
+      .catch(erro => this.erroHandler.handleError(erro));
   }
 }

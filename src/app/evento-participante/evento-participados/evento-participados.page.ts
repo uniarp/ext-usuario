@@ -3,6 +3,7 @@ import { ConsultaEventoService, Participante } from '../consulta-evento.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { NavParams } from '@ionic/angular';
+import { InscricaoPage } from 'src/app/inscricao/inscricao/inscricao.page';
 
 @Component({
   selector: 'app-evento-participandos',
@@ -16,6 +17,7 @@ export class EventoParticipadosPage implements OnInit {
   listarIngresso: any;
   navParams: any;
   eventos: any;
+  codInscricao:any;
 
   constructor(
     public consultaEventoService: ConsultaEventoService,
@@ -41,7 +43,7 @@ export class EventoParticipadosPage implements OnInit {
     console.log("1")
   }
 
-  ingresso(codEvento){
-    this.router.navigate(['/qr-code'+ codEvento]);
+  async ingresso(codInscricao){
+    this.router.navigate(['/qr-code/'+codInscricao]);
   }
 }

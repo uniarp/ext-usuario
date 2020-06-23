@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login-usuario', pathMatch: 'full' },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module')
+    loadChildren: () => import('./evento/home.module')
       .then(m => m.HomePageModule),
     canActivate: [GuardGuard]
   },

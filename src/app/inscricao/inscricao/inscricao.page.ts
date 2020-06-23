@@ -1,10 +1,11 @@
+import { EventoService, Evento } from '../../evento/evento.service';
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AlertsService } from './../../core/alerts.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
-import { InscricaoService, Evento } from './../inscricao.service';
+import { InscricaoService } from './../inscricao.service';
 
 @Component({
   selector: 'app-inscricao',
@@ -18,7 +19,8 @@ export class InscricaoPage implements OnInit {
   atividades: any[] = [];
 
   constructor(
-    public inscricaoService: InscricaoService,
+    private inscricaoService: InscricaoService,
+    private eventoService: EventoService,
     public handler: ErrorHandlerService,
     public alert: AlertsService,
     public router: Router,
@@ -35,7 +37,7 @@ export class InscricaoPage implements OnInit {
   }
 
   carregarEvento(codEvento: number) {
-    this.inscricaoService.listarEvento(codEvento)
+    this.eventoService.listarEvento(codEvento)
       .then(data => {
         console.log(data);
         this.evento = data;

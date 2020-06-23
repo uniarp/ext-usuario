@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Eventos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-slides>
+    <ion-slide *ngFor="let eve of evento">
+      <ion-card>
+        <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" />
+        <ion-card-header>
+          <ion-card-title>{{eve.titulo}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

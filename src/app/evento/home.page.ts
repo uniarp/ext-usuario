@@ -25,6 +25,7 @@ export class HomePage {
   listarEventos(){
     this.eventoService.listarEventos()
       .then(data => {
+        console.log(data);
         this.evento = data;
       })
       .catch(erro => this.error.handleError(erro));

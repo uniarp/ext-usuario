@@ -26,7 +26,11 @@ const routes: Routes = [
     path: 'login-usuario',
     loadChildren: () => import('./login-usuario/login-usuario.module')
       .then(m => m.LoginUsuarioPageModule)
+  },  {
+    path: 'certificado-declaracao',
+    loadChildren: () => import('./certificado-declaracao/certificado-declaracao.module').then( m => m.CertificadoDeclaracaoPageModule)
   },
+
 
 ];
 

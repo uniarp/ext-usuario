@@ -15,8 +15,7 @@ export class GuardGuard implements CanActivate {
   canActivate(): Promise<boolean> {
     return new Promise(resolve => {
       this.auth.getAuth().onAuthStateChanged(user => {
-        if (!user) { this.router.navigate(['login-usuario']); }
-
+        if (!user) { this.router.navigate(['/login-usuario']); }
         resolve(user ? true : false);
       });
     });

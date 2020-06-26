@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth/';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+usuario: any;
   constructor(
     public auth: AngularFireAuth,
     private router: Router,
+    public http: HttpClient,
   ) { }
 
   login(email: string, senha: string) {
-    return this.auth.signInWithEmailAndPassword(email, senha);
+    return this.auth.signInWithEmailAndPassword(email, senha)
+      .then(res => {
+        this.recuperaDados();
+      })
+      .catch(erro => console.log(erro));
   }
 
   cadastrarUser(email: string, senha: string) {
@@ -22,7 +29,6 @@ export class AuthService {
 
   logout() {
     this.auth.signOut().then(data => {
-      console.log(data);
       this.router.navigate(['/login-usuario']);
     }).catch(error => {
       console.log("Deu erro:" + error);
@@ -31,5 +37,16 @@ export class AuthService {
 
   getAuth() {
     return this.auth;
+  }
+
+  recuperaDados() {
+    this.auth.onAuthStateChanged(user => {
+      return this.http.get<any>(`https://uniarpextensao.herokuapp.com/public/participantes/vericaEmail/${user.email}`)
+        .toPromise()
+        .then(data => {
+          this.usuario = data[0];
+          console.log(data);
+        });
+    });
   }
 }

@@ -23,7 +23,7 @@
       <ion-label position="floating">E-mail<ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-input [(ngModel)]="participante.email" #email="ngModel" name="email" required
-      email></ion-input>
+      email (ionBlur)="validaEmail()"></ion-input>
       <div class="validaCamp" *ngIf="email.hasError('email')">*Informe um e-mail válido!</div>
     </ion-item>
     <ion-item>

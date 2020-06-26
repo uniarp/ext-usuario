@@ -1,3 +1,4 @@
+import { AuthService } from './../../login-usuario/auth.service';
 import { EventoService, Evento } from '../../evento/evento.service';
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { AlertsService } from './../../core/alerts.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { InscricaoService } from './../inscricao.service';
+import { auth } from 'firebase';
 
 @Component({
   selector: 'app-inscricao',
@@ -15,7 +17,7 @@ import { InscricaoService } from './../inscricao.service';
 export class InscricaoPage implements OnInit {
 
   evento = new Evento();
-  codParticipante = 8;
+  codParticipante: number;
   atividades: any[] = [];
 
   constructor(
@@ -25,8 +27,11 @@ export class InscricaoPage implements OnInit {
     public alert: AlertsService,
     public router: Router,
     public activeRoute: ActivatedRoute,
-    public alertController: AlertController
-  ) { }
+    public alertController: AlertController,
+    private auth: AuthService
+  ) {
+    this.codParticipante = auth.usuario.codParticipante;
+  }
 
   ngOnInit() {
     const codEvento = this.activeRoute.snapshot.params.codEvento;

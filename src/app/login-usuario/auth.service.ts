@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-usuario: any;
+  usuario: any;
   constructor(
     public auth: AngularFireAuth,
     private router: Router,
@@ -39,14 +39,25 @@ usuario: any;
     return this.auth;
   }
 
+
   recuperaDados() {
     this.auth.onAuthStateChanged(user => {
       return this.http.get<any>(`https://uniarpextensao.herokuapp.com/public/participantes/vericaEmail/${user.email}`)
         .toPromise()
         .then(data => {
-          this.usuario = data[0];
-          console.log(data);
+          localStorage.setItem('usuario', JSON.stringify(data[0]));
         });
     });
   }
+  
+  public carregar() {
+    const user = localStorage.getItem('usuario');
+    if (user) {
+      this.usuario = JSON.parse(user);
+      console.log(this.usuario);
+    } else {
+      this.usuario = [];
+    }
+  }
+
 }

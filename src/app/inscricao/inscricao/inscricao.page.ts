@@ -31,6 +31,9 @@ export class InscricaoPage implements OnInit {
     private auth: AuthService
   ) {
     this.codParticipante = auth.usuario.codParticipante;
+    if (this.codParticipante <= 0) {
+      this.router.navigate(['/home']);
+    }
   }
 
   ngOnInit() {

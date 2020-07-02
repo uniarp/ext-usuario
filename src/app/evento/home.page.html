@@ -13,21 +13,19 @@
   <ion-slides>
     <ion-slide *ngFor="let eve of evento">
       <ion-card>
-        <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" />
+        <img src="./assets/img/logo2.png">
         <ion-card-header>
           <ion-card-title>{{eve.titulo}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <ion-list>
-            <ion-item>
-              <ion-icon name="calendar-outline"></ion-icon>
-              <ion-label>Dara de Inicio: {{eve.periodoInicial | date:"dd/MM/y"}}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon name="calendar-outline"></ion-icon>
-              <ion-label>Dara de Encerramento: {{eve.periodoFinal | date:"dd/MM/y"}}</ion-label>
-            </ion-item>
-          </ion-list>
+          <ion-item>
+            <p> O evento terá inicio no dia {{eve.periodoInicial | date:"dd/MM/y"}} e terá seu
+              encerramento no dia {{eve.periodoFinal | date:"dd/MM/y"}}.</p>
+          </ion-item>
+          <ion-item>
+            <p> As Inscrição serão abertas aprtir do dia {{eve.inscricaoInicio | date:"dd/MM/y"}}
+              até dia {{eve.inscricaoFim | date:"dd/MM/y"}}, podendo sofrer alterações.</p>
+          </ion-item>
         </ion-card-content>
         <ion-button (click)="inscrever(eve.codEvento)">
           <ion-label>Detalhes</ion-label>

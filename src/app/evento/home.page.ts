@@ -16,12 +16,13 @@ export class HomePage {
   constructor(
     private eventoService: EventoService,
     private error: ErrorHandlerService,
-    private router: Router
+    private router: Router,
+    public auth: AuthService
   ) {
-
   }
 
   ionViewWillEnter() {
+    this.auth.carregar();
     this.listarEventos();
   }
 

@@ -8,6 +8,7 @@ export class ConsultaEventoService {
 
   participanteUrl = 'https://uniarpextensao.herokuapp.com/public/participantes';
   consultaEventoUrl: any;
+  inscricaoUrl = 'https://uniarpextensao.herokuapp.com/public/eventos';
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +28,16 @@ export class ConsultaEventoService {
       .toPromise();
   }
 
+  // listarInscricao(codInscricao: any): Promise<Evento>{
+  //   return this.http.get<Evento>(`${this.participanteUrl}/inscricao/${codInscricao}`)
+  //   .toPromise();
+  // }
+
+  async listarIngresso(codEvento: any): Promise<any>{
+    console.log(codEvento);
+    return this.http.get<any>(`${this.participanteUrl}/qrCode/${codEvento}`)
+    .toPromise();
+  }
 }
 
 export class Participante {
@@ -40,9 +51,21 @@ export class Participante {
 }
 
 export class Evento {
-  codevento: number;
   codparticipante: number;
   nome: string;
   presente: boolean;
   titulo: string;
+  codEvento: number
+  codArea: any[];
+  periodoInicial: string;
+  periodoFinal: string;
+  inscricaoInicio: string;
+  inscricaoFim: string;
+  qtdMinInscrito: number;
+  qtdMaxInscrito: number;
+  modeloDoc: string;
+  voluntario: any[];
+  atividades: any[];
+  validar: any[];
+  motivo: string;
 }

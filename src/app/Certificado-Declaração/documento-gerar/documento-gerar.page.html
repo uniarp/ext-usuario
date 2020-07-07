@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item>
+      <ion-title>
+        <h1 style="text-align: center;"><strong>{{tipoDocumento?'CERTIFICADO': 'DECLARAÇÃO'}} </strong>
+
+          <img src="./assets/img/logo.jpg" style="float:right;width:150px;height:50px;">
+        </h1>
+        <br>
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #docForm="ngForm" autocomplete="off" (ngSubmit)="documentoGerar(codInscricao)">
+    <div class="container" >
+      <ion-item>
+        <ion-text *ngFor="let inscritos of inscritos">
+          <h1 style="text-align: justify;">{{tipoDocumento?'Certificamos que ': 'Declaramos que '}}<strong>{{inscritos.nomeParticipante}}</strong>, 
+            CPF:<strong>{{inscritos.cpf}}</strong>, participou do(a)<strong>{{inscritos.nomeEvento}}</strong>, 
+            promovido pela UNIARP - Universidade Alto Vale do Rio do Peixe, no periódo de {{inscritos.periodoInicial | date:'dd/MM/yyyy'}} a
+            {{inscritos.periodoFinal | date:'dd/MM/yyyy'}} com carga horária total de <strong>(SOMA_HORAS_EVENTO) hora(s)</strong>.</h1>
+        </ion-text>
+      </ion-item>
+    </div>
+    <br>
+    <br>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h2><strong>Atividades Participadas:</strong></h2>
+          </ion-col>
+        </ion-row>
+
+        <div *ngFor="let atividade of evento.atividades">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <h3>{{atividade.titulo}} - {{atividade.dataInicio | date:'dd/MM/yyyy'}}</h3>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-item>
+    <br>
+    <br>
+    <h2>{{now}}</h2>
+    <ion-footer class="documento-rodape">
+      <ion-toolbar>
+        <ion-text *ngFor="let inscritos of inscritos">
+          <h5><strong>{{tipoDocumento?'Este Certificado ': 'Esta declaração '}}dispensa assinatura!</strong> <br>
+            Para confirmar a autenticidade deste documento acesse: <strong>(ENDEREÇO_VALIDAÇÃO)</strong> e informe a
+            chave:
+            <strong>{{inscritos.token}}</strong></h5>
+        </ion-text>
+      </ion-toolbar>
+    </ion-footer>
+  </form>
+
+</ion-content>

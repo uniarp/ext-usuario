@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { NavParams } from '@ionic/angular';
 
+import { InscricaoPage } from 'src/app/inscricao/inscricao/inscricao.page';
+
+
 @Component({
   selector: 'app-evento-participandos',
   templateUrl: './evento-participados.page.html',
@@ -11,12 +14,19 @@ import { NavParams } from '@ionic/angular';
 })
 export class EventoParticipadosPage implements OnInit {
 
+
   participante: Participante;
   cpf: number;
   carregarEvento: any;
   inscritos: any;
   navParams: any;
   eventos: any;
+  codParticipante: any;
+  carregarEvento: any;
+  listarIngresso: any;
+  navParams: any;
+  eventos: any;
+  codInscricao:any;
 
   constructor(
     public consultaEventoService: ConsultaEventoService,
@@ -29,7 +39,7 @@ export class EventoParticipadosPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(parametros => {
-      this.consultaEventoService.carregarEvento(parametros['cpf'])
+      this.consultaEventoService.carregarEvento(parametros['codParticipante'])
         .then(data => {
           this.eventos = data;
         })
@@ -38,7 +48,11 @@ export class EventoParticipadosPage implements OnInit {
   }
 
   recebe() {
-    this.cpf = this.route.queryParams['cpf'];
+    this.codParticipante = this.route.queryParams['codParticipante'];
     console.log("1")
   }
+  async ingresso(codInscricao){
+    this.router.navigate(['/qr-code/'+codInscricao]);
+  }
+
 }

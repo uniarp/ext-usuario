@@ -30,8 +30,8 @@ export class ConsultaParticipantePage implements OnInit {
     this.participante = await this.consultaEventoService.listar();
   }
 
-  async eventoParticipado(cpf) {
-    this.router.navigate(['/evento-participados/' + cpf]);
+  async eventoParticipado(codParticipante) {
+    this.router.navigate(['/evento-participados/' + codParticipante ]);
   }
 
   ionViewWillEnter() {

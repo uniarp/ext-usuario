@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ParticipanteService {
   participanteUrl = 'https://uniarpextensao.herokuapp.com/public/participantes';
   atividadeUrl: any;
-  
+
   constructor(private http: HttpClient) { }
 
   httpOptions = {
@@ -24,16 +24,22 @@ export class ParticipanteService {
       });
   }
 
+  validaEmail(email: string) {
+    return this.http.get<any>(`${this.participanteUrl}/vericaEmail/${email}`)
+      .toPromise()
+      .then(data => data);
+  }
+
   cadastrar(participante: Participante): Promise<Participante> {
     console.log(participante);
     return this.http.post<Participante>(`${this.participanteUrl}/cadastrar`, participante)
       .toPromise();
   }
 
- /* listaAtividade(codAtividade: any):Promise<Atividade>{
-    return this.http.get<any>(`${this.atividadeUrl}/listar/${codAtividade}`)
-    .toPromise();
-  }*/
+  /* listaAtividade(codAtividade: any):Promise<Atividade>{
+     return this.http.get<any>(`${this.atividadeUrl}/listar/${codAtividade}`)
+     .toPromise();
+   }*/
 }
 
 export class Participante {
@@ -44,4 +50,11 @@ export class Participante {
   senha: string;
   telefone: string;
   email: string;
+
+  constructor() {
+    this.codParticipante = null;
+    this.cpf = '';
+    this.ra = 0;
+    this.telefone = '';
+  }
 }

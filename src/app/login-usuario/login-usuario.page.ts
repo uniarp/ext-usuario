@@ -23,10 +23,13 @@ export class LoginUsuarioPage implements OnInit {
   ngOnInit() {
   }
 
+  cadastro(){
+    this.router.navigate(['/participante-cadastro']);
+  }
+
   acessar() {
     this.auth.login(this.email, this.senha)
       .then(data => {
-        console.log(data);
         this.router.navigate(['home']);
         this.email = '';
         this.senha = '';

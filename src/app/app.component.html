@@ -7,6 +7,9 @@
   <ion-content>
     <ion-menu-toggle auto-hide="false">
       <ion-list>
+        <ion-item *ngIf="authService.usuario">
+          <h3>{{authService.usuario.nome}}</h3>
+        </ion-item>
         <ion-item (click)='eventos()'>
           <ion-icon name="calendar"></ion-icon>
           <ion-label>Eventos</ion-label>

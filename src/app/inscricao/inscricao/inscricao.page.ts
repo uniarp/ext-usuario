@@ -1,3 +1,4 @@
+import { AuthService } from './../../login-usuario/auth.service';
 import { EventoService, Evento } from '../../evento/evento.service';
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { AlertsService } from './../../core/alerts.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { InscricaoService } from './../inscricao.service';
+import { auth } from 'firebase';
 
 @Component({
   selector: 'app-inscricao',
@@ -15,8 +17,9 @@ import { InscricaoService } from './../inscricao.service';
 export class InscricaoPage implements OnInit {
 
   evento = new Evento();
-  codParticipante = 8;
+  participante: any[];
   atividades: any[] = [];
+  codParticipante: number;
 
   constructor(
     private inscricaoService: InscricaoService,
@@ -25,8 +28,11 @@ export class InscricaoPage implements OnInit {
     public alert: AlertsService,
     public router: Router,
     public activeRoute: ActivatedRoute,
-    public alertController: AlertController
-  ) { }
+    public alertController: AlertController,
+    private auth: AuthService
+  ) {
+    
+  }
 
   ngOnInit() {
     const codEvento = this.activeRoute.snapshot.params.codEvento;
@@ -34,6 +40,12 @@ export class InscricaoPage implements OnInit {
       console.log(codEvento);
       this.carregarEvento(codEvento);
     }
+    this.auth.carregar();
+    console.log(this.auth.usuario.codParticipante);
+    this.codParticipante=this.auth.usuario.codParticipante;
+    /*if (this.codParticipante <= 0) {
+      this.router.navigate(['/home']);
+    }*/
   }
 
   carregarEvento(codEvento: number) {
@@ -44,6 +56,10 @@ export class InscricaoPage implements OnInit {
         this.atividades = this.evento.atividades;
       })
       .catch(erro => this.handler.handleError(erro));
+  }
+
+  async gerarDocumento(codevento:number) {
+    this.router.navigate(['/documento-gerar', this.codParticipante, codevento]);
   }
 
   desmarcaAtvidade(codAtividade) {

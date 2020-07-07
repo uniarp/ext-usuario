@@ -17,6 +17,14 @@ const routes: Routes = [
       canActivate: [GuardGuard]
   },
   {
+
+    path: 'evento-participados/:codParticipante',
+    loadChildren: () => import('./evento-participante/evento-participados/evento-participados.module').then( m => m.EventoParticipadosPageModule)
+  },
+  {
+    path: 'consulta-participante',
+    loadChildren: () => import('./evento-participante/consulta-Participante/consulta-participante/consulta-participante.module').then( m => m.ConsultaParticipantePageModule)
+  },
     path: 'participante-cadastro',
     loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module')
       .then(m => m.ParticipanteCadastroPageModule),

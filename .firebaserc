@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ext-usuario": {
+      "hosting": {
+        "app": [
+          "ext-usuario"
+        ]
+      }
+    }
+  }
+}

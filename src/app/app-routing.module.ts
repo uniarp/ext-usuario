@@ -1,21 +1,23 @@
+import { GuardGuard } from './guard/guard.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    loadChildren: () => import('./evento/home.module')
+      .then(m => m.HomePageModule),
+    canActivate: [GuardGuard]
   },
   {
     path: 'inscricao',
-    loadChildren: () => import('./inscricao/inscricao/inscricao.module').then( m => m.InscricaoPageModule)
+    loadChildren: () => import('./inscricao/inscricao/inscricao.module')
+      .then(m => m.InscricaoPageModule),
+      canActivate: [GuardGuard]
   },
   {
+
     path: 'evento-participados/:codParticipante',
     loadChildren: () => import('./evento-participante/evento-participados/evento-participados.module').then( m => m.EventoParticipadosPageModule)
   },
@@ -28,7 +30,19 @@ const routes: Routes = [
     loadChildren: () => import('./evento-participante/qr-code/qr-code.module').then( m => m.QrCodePageModule)
   },
 
-
+    path: 'participante-cadastro',
+    loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module')
+      .then(m => m.ParticipanteCadastroPageModule),
+  },
+  {
+    path: 'login-usuario',
+    loadChildren: () => import('./login-usuario/login-usuario.module')
+      .then(m => m.LoginUsuarioPageModule)
+  },
+  {
+    path: 'documento-gerar/:codInscricao/:codEvento',
+    loadChildren: () => import('./Certificado-Declaração/documento-gerar/documento-gerar.module').then( m => m.DocumentoGerarPageModule)
+  }
 
 ];
 

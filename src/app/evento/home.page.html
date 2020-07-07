@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Eventos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-slides>
+    <ion-slide *ngFor="let eve of evento">
+      <ion-card>
+        <img src="./assets/img/logo2.png">
+        <ion-card-header>
+          <ion-card-title>{{eve.titulo}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <p> O evento terá inicio no dia {{eve.periodoInicial | date:"dd/MM/y"}} e terá seu
+              encerramento no dia {{eve.periodoFinal | date:"dd/MM/y"}}.</p>
+          </ion-item>
+          <ion-item>
+            <p> As Inscrição serão abertas aprtir do dia {{eve.inscricaoInicio | date:"dd/MM/y"}}
+              até dia {{eve.inscricaoFim | date:"dd/MM/y"}}, podendo sofrer alterações.</p>
+          </ion-item>
+        </ion-card-content>
+        <ion-button (click)="inscrever(eve.codEvento)">
+          <ion-label>Detalhes</ion-label>
+        </ion-button>        
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

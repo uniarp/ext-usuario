@@ -58,6 +58,17 @@ export class AuthService {
     } else {
       this.usuario = [];
     }
+  }  
+  public retornaCodPart():number {
+    const user = localStorage.getItem('usuario');
+    if (user) {
+      this.usuario = JSON.parse(user);
+      console.log(this.usuario);
+      return this.usuario.codPaticipante;
+    } else{
+      console.log("erro");
+    }
+    
   }
 
 }

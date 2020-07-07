@@ -17,8 +17,9 @@ import { auth } from 'firebase';
 export class InscricaoPage implements OnInit {
 
   evento = new Evento();
-  codParticipante: number;
+  participante: any[];
   atividades: any[] = [];
+  codParticipante: number;
 
   constructor(
     private inscricaoService: InscricaoService,
@@ -30,10 +31,7 @@ export class InscricaoPage implements OnInit {
     public alertController: AlertController,
     private auth: AuthService
   ) {
-    this.codParticipante = auth.usuario.codParticipante;
-    if (this.codParticipante <= 0) {
-      this.router.navigate(['/home']);
-    }
+    
   }
 
   ngOnInit() {
@@ -42,6 +40,12 @@ export class InscricaoPage implements OnInit {
       console.log(codEvento);
       this.carregarEvento(codEvento);
     }
+    this.auth.carregar();
+    console.log(this.auth.usuario.codParticipante);
+    this.codParticipante=this.auth.usuario.codParticipante;
+    /*if (this.codParticipante <= 0) {
+      this.router.navigate(['/home']);
+    }*/
   }
 
   carregarEvento(codEvento: number) {
@@ -52,6 +56,10 @@ export class InscricaoPage implements OnInit {
         this.atividades = this.evento.atividades;
       })
       .catch(erro => this.handler.handleError(erro));
+  }
+
+  async gerarDocumento(codevento:number) {
+    this.router.navigate(['/documento-gerar', this.codParticipante, codevento]);
   }
 
   desmarcaAtvidade(codAtividade) {

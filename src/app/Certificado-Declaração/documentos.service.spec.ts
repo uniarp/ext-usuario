@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { TestBed } from '@angular/core/testing';
 
-import { CertificadoDeclaracaoPage } from './certificado-declaracao.page';
+import { DocumentosService } from './documentos.service';
 
 describe('DocumentosService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
@@ -9,6 +8,5 @@ describe('DocumentosService', () => {
   it('should be created', () => {
     const service: DocumentosService = TestBed.get(DocumentosService);
     expect(service).toBeTruthy();
-  
   });
 });

@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CertificadoDeclaracaoPage } from './certificado-declaracao.page';
+import { DocumentoGerarPage } from './documento-gerar.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: CertificadoDeclaracaoPage
+    component: DocumentoGerarPage
+  },
+  {
+    path: '/:codInscricao/:codEvento',
+    component: DocumentoGerarPage
   }
 ];
 
@@ -14,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CertificadoDeclaracaoPageRoutingModule {}
+export class DocumentoGerarPageRoutingModule {}

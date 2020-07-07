@@ -27,9 +27,9 @@ const routes: Routes = [
       .then(m => m.LoginUsuarioPageModule)
   },
   {
-    path: 'certificado-declaracao',
-    loadChildren: () => import('./certificado-declaracao/certificado-declaracao.module').then( m => m.CertificadoDeclaracaoPageModule)
-  },
+    path: 'documento-gerar/:codInscricao/:codEvento',
+    loadChildren: () => import('./Certificado-Declaração/documento-gerar/documento-gerar.module').then( m => m.DocumentoGerarPageModule)
+  }
 
 
 ];

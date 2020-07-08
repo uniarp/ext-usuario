@@ -39,7 +39,7 @@ const routes: Routes = [
     loadChildren: () => import('./evento-participante/consulta-Participante/consulta-participante/consulta-participante.module').then( m => m.ConsultaParticipantePageModule)
   },
 
-
+  {
     path: 'participante-cadastro',
     loadChildren: () => import('./participante/participante-cadastro/participante-cadastro.module')
       .then(m => m.ParticipanteCadastroPageModule),

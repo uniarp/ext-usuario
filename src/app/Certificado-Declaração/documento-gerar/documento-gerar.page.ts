@@ -17,7 +17,7 @@ export class DocumentoGerarPage implements OnInit {
   now = new Date();
   evento = new Evento();
   atividades: any[] = [];
-  participante= new Participante();
+  participante: any[] = [];
   @Input() codEvento: number;
   @Input() codInscricao: number;
   inscricao: any[] = [];
@@ -59,10 +59,10 @@ export class DocumentoGerarPage implements OnInit {
   }
 
   listarInscritos(codInscricao: number) {
-    this.inscricaoParticipanteService.listaParticipante(codInscricao)
+    this.documentosService.dadosParaDoc(codInscricao)
       .then(data => {
         this.participante = data;
-        console.log(data);
+        console.log(this.participante);
       })
       .catch(erro => this.erroHandler.handleError(erro));
     this.eventoService.listarEvento(this.codEvento)

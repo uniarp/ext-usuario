@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { AuthService } from './../../login-usuario/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ParticipanteService, Participante } from '../participante.service';
@@ -78,7 +79,7 @@ export class ParticipanteCadastroPage implements OnInit {
       });
   }
 
-  gravar() {
+  gravar(form: NgForm) {
     this.participante.codParticipante = this.participante.codParticipante ? this.participante.codParticipante : null;
     console.log('no cadastro: ' + this.valida);
     if (this.valida) {

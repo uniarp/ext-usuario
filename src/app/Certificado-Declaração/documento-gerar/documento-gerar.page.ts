@@ -17,7 +17,7 @@ export class DocumentoGerarPage implements OnInit {
   now = new Date();
   evento = new Evento();
   atividades: any[] = [];
-  participante: any[] = [];
+  participante: any;
   @Input() codEvento: number;
   @Input() codInscricao: number;
   inscricao: any[] = [];
@@ -58,11 +58,9 @@ export class DocumentoGerarPage implements OnInit {
     return Boolean(this.codInscricao>=90); //O correto aqui é colocar o SOMA_HORAS_EVENTO
   }
 
-  listarInscritos(codInscricao: number) {
-    console.log(codInscricao);
+  listarInscritos(codInscricao: number) {;
     this.documentosService.dadosParaDoc(codInscricao)
       .then(data => {
-        this.inscritos = data;
         this.participante = data;
         console.log(this.participante);
       })

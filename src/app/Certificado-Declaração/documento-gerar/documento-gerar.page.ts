@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EventoService, Evento } from 'src/app/evento/evento.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
-import { ParticipanteService } from 'src/app/participante/participante.service';
+import { ParticipanteService, Participante } from 'src/app/participante/participante.service';
 import { DocumentosService } from '../documentos.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { AlertsService } from 'src/app/core/alerts.service';
@@ -17,7 +17,7 @@ export class DocumentoGerarPage implements OnInit {
   now = new Date();
   evento = new Evento();
   atividades: any[] = [];
-  inscritos: any[] = [];
+  participante: any[] = [];
   @Input() codEvento: number;
   @Input() codInscricao: number;
   inscricao: any[] = [];
@@ -63,6 +63,8 @@ export class DocumentoGerarPage implements OnInit {
     this.documentosService.dadosParaDoc(codInscricao)
       .then(data => {
         this.inscritos = data;
+        this.participante = data;
+        console.log(this.participante);
       })
       .catch(erro => this.erroHandler.handleError(erro));
     this.eventoService.listarEvento(this.codEvento)

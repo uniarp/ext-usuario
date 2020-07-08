@@ -19,11 +19,10 @@ export class AppComponent {
     private statusBar: StatusBar,
     private router: Router,
     public authService: AuthService,
-     
+
   ) {
     this.initializeApp();
   }
-
 
   logout() {
     this.authService.logout();
@@ -31,6 +30,10 @@ export class AppComponent {
   eventos() {
     this.router.navigate(['/home']);
   }
+  eventosParticipados() {
+    this.router.navigate(['/evento-participados']);
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

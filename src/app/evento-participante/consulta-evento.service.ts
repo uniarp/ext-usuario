@@ -22,7 +22,8 @@ export class ConsultaEventoService {
 
   async carregarEvento(codParticipante: any): Promise<Evento> {
     return this.http.get<Evento>(`${this.participanteUrl}/eventos/${codParticipante}`)
-      .toPromise();
+      .toPromise()
+      .then(data => data);
   }
 
   listar(): Promise<Participante> {

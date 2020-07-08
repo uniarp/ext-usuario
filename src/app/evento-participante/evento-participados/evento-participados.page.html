@@ -37,6 +37,9 @@
               </ion-col>
               <ion-item>
                 <ion-button (click)="ingresso(evento.codparticipanteevento)">Ingresso</ion-button>
+                <ion-button (click)='gerarDocumento(evento.codevento)'>
+                  <ion-icon name="school-outline"></ion-icon>
+                </ion-button>
               </ion-item>
             </ion-row>
           </ion-radio-group>

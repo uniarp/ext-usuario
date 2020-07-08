@@ -59,8 +59,10 @@ export class DocumentoGerarPage implements OnInit {
   }
 
   listarInscritos(codInscricao: number) {
+    console.log(codInscricao);
     this.documentosService.dadosParaDoc(codInscricao)
       .then(data => {
+        this.inscritos = data;
         this.participante = data;
         console.log(this.participante);
       })

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ConsultaEventoService } from '../consulta-evento.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { Evento } from 'src/app/inscricao/inscricao.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({

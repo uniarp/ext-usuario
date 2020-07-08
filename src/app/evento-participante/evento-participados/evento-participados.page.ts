@@ -1,3 +1,4 @@
+import { AuthService } from './../../login-usuario/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ConsultaEventoService, Participante } from '../consulta-evento.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,37 +23,39 @@ export class EventoParticipadosPage implements OnInit {
   navParams: any;
   eventos: any;
   codParticipante: any;
-  carregarEvento: any;
   listarIngresso: any;
-  navParams: any;
-  eventos: any;
-  codInscricao:any;
+  codInscricao: any;
 
   constructor(
     public consultaEventoService: ConsultaEventoService,
     public router: Router,
     private route: ActivatedRoute,
     public handler: ErrorHandlerService,
-    private erroHandler: ErrorHandlerService
+    private erroHandler: ErrorHandlerService,
+    private authService: AuthService
 
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(parametros => {
-      this.consultaEventoService.carregarEvento(parametros['codParticipante'])
-        .then(data => {
-          this.eventos = data;
-        })
-        .catch(erro => this.erroHandler.handleError(erro));
-    });
+    this.codParticipante = this.authService.usuario.codParticipante;
+    this.consultaEventoService.carregarEvento(this.codParticipante)
+      .then(data => {
+        this.eventos = data;
+        console.log(data);
+      })
+      .catch(erro => this.erroHandler.handleError(erro));
   }
 
   recebe() {
-    this.codParticipante = this.route.queryParams['codParticipante'];
+    this.codParticipante = this.authService.usuario.codParticipante;
     console.log("1")
   }
-  async ingresso(codInscricao){
-    this.router.navigate(['/qr-code/'+codInscricao]);
+  async ingresso(codInscricao) {
+    this.router.navigate(['/qr-code/' + codInscricao]);
+  }
+  async gerarDocumento(codEvento: number) {
+    console.log(codEvento, this.codParticipante);
+    this.router.navigate(['/documento-gerar/', this.codParticipante, codEvento]);
   }
 
 }

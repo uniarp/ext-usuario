@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pesquisa de Eventos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <ion-item>
+      <ion-label> Buscar Evento:</ion-label>
+      <ion-input placeholder="Ex: Sead"></ion-input>
+      <ion-button>
+        <ion-icon name="search-outline"></ion-icon>
+        Buscar
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>Evento</ion-col>
+          <!-- <ion-col>Inscrição</ion-col> -->
+          <ion-col>Presente</ion-col>
+        </ion-row>
+        <div *ngFor="let evento of eventos">
+          <ion-radio-group>
+            <ion-row>
+              <ion-col>
+                {{evento.titulo}}
+              </ion-col>
+              <!-- <ion-col>
+                {{evento.codInscricao ? 'Sim' : 'Não'}}
+              </ion-col> -->
+              <ion-col>
+                {{evento.presente ? 'Sim' : 'Não'}}
+              </ion-col>
+              <ion-item>
+                <ion-button (click)="ingresso(evento.codparticipanteevento)">Ingresso</ion-button>
+              </ion-item>
+            </ion-row>
+          </ion-radio-group>
+        </div>
+      </ion-grid>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-footer>
+</ion-footer>

@@ -16,11 +16,11 @@
   <form #docForm="ngForm" autocomplete="off" (ngSubmit)="documentoGerar(codInscricao)">
     <div class="container" >
       <ion-item>
-        <ion-text *ngFor="let inscritos of inscritos">
-          <h1 style="text-align: justify;">{{tipoDocumento?'Certificamos que ': 'Declaramos que '}}<strong>{{inscritos.nomeParticipante}}</strong>, 
-            CPF:<strong>{{inscritos.cpf}}</strong>, participou do(a)<strong>{{inscritos.nomeEvento}}</strong>, 
-            promovido pela UNIARP - Universidade Alto Vale do Rio do Peixe, no periódo de {{inscritos.periodoInicial | date:'dd/MM/yyyy'}} a
-            {{inscritos.periodoFinal | date:'dd/MM/yyyy'}} com carga horária total de <strong>(SOMA_HORAS_EVENTO) hora(s)</strong>.</h1>
+        <ion-text>
+          <h1 style="text-align: justify;">{{tipoDocumento?'Certificamos que ': 'Declaramos que '}}<strong>{{participante.nome}}</strong>, 
+            CPF:<strong>{{participante.cpf}}</strong>, participou do(a)<strong>{{evento.titulo}}</strong>, 
+            promovido pela UNIARP - Universidade Alto Vale do Rio do Peixe, no periódo de {{evento.periodoInicial | date:'dd/MM/yyyy'}} a
+            {{evento.periodoFinal | date:'dd/MM/yyyy'}} com carga horária total de <strong>(SOMA_HORAS_EVENTO) hora(s)</strong>.</h1>
         </ion-text>
       </ion-item>
     </div>

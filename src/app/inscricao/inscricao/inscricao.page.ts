@@ -31,18 +31,17 @@ export class InscricaoPage implements OnInit {
     public alertController: AlertController,
     private auth: AuthService
   ) {
-    
+
   }
 
   ngOnInit() {
     const codEvento = this.activeRoute.snapshot.params.codEvento;
     if (codEvento) {
-      console.log(codEvento);
       this.carregarEvento(codEvento);
     }
     this.auth.carregar();
-    console.log(this.auth.usuario.codParticipante);
-    this.codParticipante=this.auth.usuario.codParticipante;
+    this.codParticipante = this.auth.usuario.codParticipante;
+
     /*if (this.codParticipante <= 0) {
       this.router.navigate(['/home']);
     }*/
@@ -51,15 +50,10 @@ export class InscricaoPage implements OnInit {
   carregarEvento(codEvento: number) {
     this.eventoService.listarEvento(codEvento)
       .then(data => {
-        console.log(data);
         this.evento = data;
         this.atividades = this.evento.atividades;
       })
       .catch(erro => this.handler.handleError(erro));
-  }
-
-  async gerarDocumento(codevento:number) {
-    this.router.navigate(['/documento-gerar', this.codParticipante, codevento]);
   }
 
   desmarcaAtvidade(codAtividade) {
@@ -75,7 +69,7 @@ export class InscricaoPage implements OnInit {
       i.codParticipante = this.codParticipante;
       i.atividades = this.atividades;
     });
-
+    console.log(inscricao);
     this.confirmaInscricao(inscricao);
   }
 

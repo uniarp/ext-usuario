@@ -12,16 +12,15 @@ import { Component } from '@angular/core';
 export class HomePage {
 
   evento = [];
-  codParticipante: number;
   constructor(
     private eventoService: EventoService,
     private error: ErrorHandlerService,
     private router: Router,
     public auth: AuthService
   ) {
-    //this.codParticipante = auth.usuario.codParticipante;
+
   }
-      
+
   ionViewWillEnter() {
     this.auth.carregar();
     console.log(this.auth.usuario.codParticipante);
@@ -36,7 +35,6 @@ export class HomePage {
       })
       .catch(erro => this.error.handleError(erro));
   }
-  
 
   inscrever(codEvento: number) {
     this.router.navigate([`/inscricao/${codEvento}`]);

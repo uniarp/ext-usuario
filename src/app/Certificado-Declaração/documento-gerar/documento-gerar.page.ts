@@ -47,7 +47,7 @@ export class DocumentoGerarPage implements OnInit {
 
     await this.delay(3000);
     await print();
-    //this.router.navigate(['home']);
+    this.router.navigate(['home']);
   }
 
   delay(ms: number) {
